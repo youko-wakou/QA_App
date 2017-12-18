@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "477970037331",
+    "firebase_url": "https://qaapp-87e58.firebaseio.com",
+    "project_id": "qaapp-87e58",
+    "storage_bucket": "qaapp-87e58.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:477970037331:android:cb0b9d3c385174f7",
+        "android_client_info": {
+          "package_name": "jp.techacademy.wakou.youko.qa_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "477970037331-fdfg2an95ie3kmstf8ttvvjq27fto70i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgduz7UhQS_P8gUR8RD5vjeIgwsTtXous"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

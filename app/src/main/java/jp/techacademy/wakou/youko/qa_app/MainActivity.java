@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -29,10 +30,19 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if (mGenre == 0) {
+                    Snackbar.make(view, "ジャンルを選択してください", Snackbar.LENGTH_LONG).show();
+                    return;
+                }
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-                if(user == null){
-                    Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+                if (user == null) {
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), QuestionSendActivity.class);
+                    intent.putExtra("genre", mGenre);
                     startActivity(intent);
                 }
             }

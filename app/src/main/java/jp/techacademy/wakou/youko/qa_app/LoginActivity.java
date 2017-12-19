@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
     boolean mIsCreateAccount = false;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -55,15 +55,15 @@ public class LoginActivity extends AppCompatActivity {
 
         mCreateAccountListener = new OnCompleteListener<AuthResult>() {
             @Override
-            public void onComplete(Task<AuthResult>task){
-                    if(task.isSuccessful()){
-                        String email = mEmailEditText.getText().toString();
-                        String password = mPasswordEditText.getText().toString();
-                        login(email,password);
-                    }else{
-                        View view = findViewById(android.R.id.content);
-                        Snackbar.make(view,"アカウント作成に失敗しました",Snackbar.LENGTH_LONG).show();
-                        mProgress.dismiss();
+            public void onComplete(Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    String email = mEmailEditText.getText().toString();
+                    String password = mPasswordEditText.getText().toString();
+                    login(email, password);
+                } else {
+                    View view = findViewById(android.R.id.content);
+                    Snackbar.make(view, "アカウント作成に失敗しました", Snackbar.LENGTH_LONG).show();
+                    mProgress.dismiss();
 
                 }
             }
@@ -71,84 +71,86 @@ public class LoginActivity extends AppCompatActivity {
         mLoginListener = new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(Task<AuthResult> task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     FirebaseUser user = mAuth.getCurrentUser();
                     DatabaseReference userRef = mDataBaseReference.child(Const.UsersPATH).child(user.getUid());
 
-                    if(mIsCreateAccount){
+                    if (mIsCreateAccount) {
                         String name = mNameEditText.getText().toString();
-                        Map<String,String> data = new HashMap<String,String>();
-                        data.put("name",name);
+                        Map<String, String> data = new HashMap<String, String>();
+                        data.put("name", name);
                         userRef.setValue(data);
 
                         saveName(name);
-                    }else{
-                        userRef.addListenerForSingleValueEvent(new ValueEventListener(){
+                    } else {
+                        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
-                            public void onDataChange(DataSnapshot snapshot){
-                                Map data = (Map)snapshot.getValue();
-                                saveName((String)data.get("name"));
+                            public void onDataChange(DataSnapshot snapshot) {
+                                Map data = (Map) snapshot.getValue();
+                                saveName((String) data.get("name"));
                             }
+
                             @Override
-                            public void onCancelled(DatabaseError firebaseError){
+                            public void onCancelled(DatabaseError firebaseError) {
                             }
                         });
                     }
                     mProgress.dismiss();
                     finish();
-                }else{
+                } else {
                     View view = findViewById(android.R.id.content);
-                    Snackbar.make(view,"ログインに失敗しました",Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(view, "ログインに失敗しました", Snackbar.LENGTH_LONG).show();
                     mProgress.dismiss();
                 }
             }
         };
         setTitle("ログイン");
-        mEmailEditText = (EditText)findViewById(R.id.emailText);
-        mPasswordEditText = (EditText)findViewById(R.id.passwordText);
-        mNameEditText = (EditText)findViewById(R.id.nameText);
+        mEmailEditText = (EditText) findViewById(R.id.emailText);
+        mPasswordEditText = (EditText) findViewById(R.id.passwordText);
+        mNameEditText = (EditText) findViewById(R.id.nameText);
 
         mProgress = new ProgressDialog(this);
         mProgress.setMessage("処理中…");
 
         Button createButton = (Button) findViewById(R.id.createButton);
-        createButton.setOnClickListener(new View.OnClickListener(){
+        createButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                InputMethodManager im = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                im.hideSoftInputFromWindow(v.getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
+            public void onClick(View v) {
+                InputMethodManager im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                im.hideSoftInputFromWindow(v.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 
                 String email = mEmailEditText.getText().toString();
                 String password = mPasswordEditText.getText().toString();
                 String name = mNameEditText.getText().toString();
 
-                if(email.length() != 0 && password.length() >= 6 && name.length() !=0){
+                if (email.length() != 0 && password.length() >= 6 && name.length() != 0) {
                     mIsCreateAccount = true;
-                    createAccount(email,password);
-                }else{
-                    Snackbar.make(v,"正しく入力してください",Snackbar.LENGTH_LONG).show();
+                    createAccount(email, password);
+                } else {
+                    Snackbar.make(v, "正しく入力してください", Snackbar.LENGTH_LONG).show();
                 }
             }
         });
 
-        Button loginButton = (Button)findViewById(R.id.loginButton);
-        loginButton.setOnClickListener(new View.OnClickListener(){
+        Button loginButton = (Button) findViewById(R.id.loginButton);
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                InputMethodManager im = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                im.hideSoftInputFromWindow(v.getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
+            public void onClick(View v) {
+                InputMethodManager im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                im.hideSoftInputFromWindow(v.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 
                 String email = mEmailEditText.getText().toString();
                 String password = mPasswordEditText.getText().toString();
 
-                if(email.length() != 0 && password.length() >= 6){
+                if (email.length() != 0 && password.length() >= 6) {
                     mIsCreateAccount = false;
-                    login(email,password);
-                }else{
-                    Snackbar.make(v,"正しく入力して下さい",Snackbar.LENGTH_LONG).show();
+                    login(email, password);
+                } else {
+                    Snackbar.make(v, "正しく入力して下さい", Snackbar.LENGTH_LONG).show();
                 }
             }
         });
+        }
         private void createAccount(String email,String password){
             mProgress.show();
             mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(mCreateAccountListener);

@@ -91,6 +91,9 @@ public class QuestionDetailActivity extends AppCompatActivity{
                     Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
                     startActivity(intent);
                 }else{
+                    Intent intent = new Intent(getApplicationContext(),AnswerSendActivity.class);
+                    intent.putExtra("question",mQuestion);
+                    startActivity(intent);
 
                 }
             }

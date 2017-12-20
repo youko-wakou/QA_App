@@ -1,6 +1,8 @@
 package jp.techacademy.wakou.youko.qa_app;
 
-import android.content.Intent;
+        import android.content.Intent;
+        import android.graphics.Bitmap;
+        import android.graphics.BitmapFactory;
         import android.os.Bundle;
         import android.support.design.widget.FloatingActionButton;
         import android.support.design.widget.NavigationView;
@@ -22,9 +24,9 @@ import android.content.Intent;
         import com.google.firebase.database.DataSnapshot;
         import com.google.firebase.database.DatabaseError;
         import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+        import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
+        import java.util.ArrayList;
         import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
@@ -74,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 mAdapter.notifyDataSetChanged();
             }
             @Override
-            public void onChildChanged(DataSnapshotdataSnapshot,String s){
+            public void onChildChanged(DataSnapshot dataSnapshot,String s){
                 HashMap map = (HashMap)dataSnapshot.getValue();
 
                 for(Question question:mQuestionArrayList){
@@ -82,8 +84,8 @@ public class MainActivity extends AppCompatActivity {
                         question.getAnswers().clear();
                         HashMap answerMap = (HashMap)map.get("answers");
                         if(answerMap != null){
-                            for(Object key: answerMap.KeySet()){
-                                HashMap temp = (HashMap)answerMap.get(String)key);
+                            for(Object key: answerMap.keySet()){
+                                HashMap temp = (HashMap)answerMap.get((String)key);
                                 String answerBody = (String)temp.get("body");
                                 String answerName = (String)temp.get("name");
                                 String answerUid = (String)temp.get("uid");
@@ -98,10 +100,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        @Override
-        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-        }
 
         @Override
         public void onChildRemoved(DataSnapshot dataSnapshot) {
@@ -117,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         public void onCancelled(DatabaseError databaseError) {
 
         }
-    }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

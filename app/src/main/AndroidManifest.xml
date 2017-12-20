@@ -21,11 +21,15 @@ package="jp.techacademy.wakou.youko.qa_app">
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
     </activity>
-    <activity android:name=".LoginActivity"/>
+    <activity android:name=".LoginActivity">
+    </activity>
     <activity android:name=".SettingActivity">
 
     </activity>
     <activity android:name=".QuestionSendActivity">
+
+    </activity>
+    <activity android:name=".QuestionDetailActivity">
 
     </activity>
 </application>

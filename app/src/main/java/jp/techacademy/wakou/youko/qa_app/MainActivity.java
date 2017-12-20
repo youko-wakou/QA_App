@@ -16,6 +16,7 @@ package jp.techacademy.wakou.youko.qa_app;
         import android.view.Menu;
         import android.view.MenuItem;
         import android.view.View;
+        import android.widget.AdapterView;
         import android.widget.ListView;
 
         import com.google.firebase.auth.FirebaseAuth;
@@ -190,6 +191,16 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new QuestionsListAdapter(this);
         mQuestionArrayList = new ArrayList<Question>();
         mAdapter.notifyDataSetChanged();
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent,View view,int position,long id) {
+                Intent intent = new Intent(getApplicationContext(),QuestionDetailActivity.class);
+
+                intent.putExtra("question",mQuestionArrayList.get(position));
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

@@ -1,8 +1,10 @@
 package jp.techacademy.wakou.youko.qa_app;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +12,13 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
 
-public class QuestionsListAdapter extends BaseAdapter {
+public abstract class QuestionsListAdapter extends BaseAdapter {
     private LayoutInflater mLayoutInflater = null;
     private ArrayList<Question>mQuestionArrayList;
 
@@ -56,5 +62,8 @@ public class QuestionsListAdapter extends BaseAdapter {
     }
     public void setQuestionArrayList(ArrayList<Question> questionArrayList){
         mQuestionArrayList = questionArrayList;
+    }
+
+    private void onCreate(){
     }
 }

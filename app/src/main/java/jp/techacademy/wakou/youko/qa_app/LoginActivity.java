@@ -86,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
                         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot snapshot) {
-                                Map data = (Map) snapshot.getValue();
+                                Map data = snapshot.getValue(Map.class);
                                 saveName((String) data.get("name"));
                             }
 
@@ -150,8 +150,9 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-        }
-        private void createAccount(String email,String password){
+    }
+
+         private void createAccount(String email,String password){
             mProgress.show();
             mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(mCreateAccountListener);
         }
@@ -165,5 +166,6 @@ public class LoginActivity extends AppCompatActivity {
             editor.putString(Const.NameKEY,name);
             editor.commit();
         }
+
     }
 

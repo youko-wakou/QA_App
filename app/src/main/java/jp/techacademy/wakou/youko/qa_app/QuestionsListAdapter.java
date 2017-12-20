@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
-public abstract class QuestionsListAdapter extends BaseAdapter {
+public class QuestionsListAdapter extends BaseAdapter {
     private LayoutInflater mLayoutInflater = null;
     private ArrayList<Question>mQuestionArrayList;
 
@@ -64,6 +65,9 @@ public abstract class QuestionsListAdapter extends BaseAdapter {
         mQuestionArrayList = questionArrayList;
     }
 
-    private void onCreate(){
+    private void onCreate(Context context){
+        SharedPreferences sp = context.getSharedPreferences(Const.NameKEY,Context.MODE_PRIVATE);
+        String name = sp.getString(Const.NameKEY,"");
+        Log.d("test",name);
     }
 }

@@ -4,12 +4,14 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,10 +20,22 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
-
 public class QuestionsListAdapter extends BaseAdapter {
     private LayoutInflater mLayoutInflater = null;
     private ArrayList<Question>mQuestionArrayList;
+    private Button mfavo_b;
+
+//        @Override
+    private void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.list_questions);
+        mfavo_b = (Button)findViewById(R.id.favobt);
+        mfavo_b.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                
+            }
+        });
+    }
 
     public QuestionsListAdapter(Context context){
         mLayoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -65,9 +79,5 @@ public class QuestionsListAdapter extends BaseAdapter {
         mQuestionArrayList = questionArrayList;
     }
 
-    private void onCreate(Context context){
-        SharedPreferences sp = context.getSharedPreferences(Const.NameKEY,Context.MODE_PRIVATE);
-        String name = sp.getString(Const.NameKEY,"");
-        Log.d("test",name);
-    }
+
 }

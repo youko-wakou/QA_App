@@ -23,19 +23,17 @@ import java.util.ArrayList;
 public class QuestionsListAdapter extends BaseAdapter {
     private LayoutInflater mLayoutInflater = null;
     private ArrayList<Question>mQuestionArrayList;
-    private Button mfavo_b;
-
-//        @Override
-    private void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.list_questions);
-        mfavo_b = (Button)findViewById(R.id.favobt);
+    public Button mfavo_b;
+    private void onStart(){
+        mfavo_b = findViewById(R.id.favobt);
         mfavo_b.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                
+
             }
         });
+
     }
+
 
     public QuestionsListAdapter(Context context){
         mLayoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

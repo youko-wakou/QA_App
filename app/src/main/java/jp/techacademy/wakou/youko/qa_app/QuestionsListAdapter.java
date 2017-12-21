@@ -1,11 +1,13 @@
 package jp.techacademy.wakou.youko.qa_app;
 
 import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.DialogPreference;
 import android.preference.PreferenceManager;
@@ -21,10 +23,13 @@ import android.widget.TextView;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import java.applet.*;
+import java.awt.*;
+
 
 import java.util.ArrayList;
 public class QuestionsListAdapter extends BaseAdapter {
-    public final int favoNum = 0;
+    public int favoNum = 0;
     QuestionListActivity activityQ;
     private LayoutInflater mLayoutInflater = null;
     private ArrayList<Question>mQuestionArrayList;
@@ -46,7 +51,7 @@ public class QuestionsListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
         if(convertView == null){
-            convertView = mLayoutInflater.inflate(R.layout.list_questions,parent,false);
+          convertView = mLayoutInflater.inflate(R.layout.list_questions,parent,false);
         }
         TextView titleText = (TextView) convertView.findViewById(R.id.titleTextView);
         titleText.setText(mQuestionArrayList.get(position).getTitle());
@@ -62,27 +67,16 @@ public class QuestionsListAdapter extends BaseAdapter {
         favoData.setText(String.valueOf(favoNum));
         favoData.setVisibility(View.GONE);
 
-
-
-        Button favoBT = (Button)convertView.findViewById(R.id.favobt);
+        final Button favoBT = (Button)convertView.findViewById(R.id.favobt);
         favoBT.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                 if(favoNum == 0){
+                     favoNum = 1;
+                     favoBT.setBackground(Color.yellow);
 
-                if(favoNum == 0){
-                    int favoNum = 1;
-                    new AlertDialog.Builder(activityQ)
-                            .setTitle("お気に入り")
-                            .setMessage("追加しました")
-                            .setPositiveButton("OK", null)
-                            .show();
 
-                }else{
-                    int favoNum = 0;
-                    new AlertDialog.Builder(activityQ)
-                            .setTitle("お気に入り")
-                            .setMessage("削除しました")
-                            .setPositiveButton("OK", null)
-                            .show();
+                 }else{
+                    favoNum = 0;
                 }
                 Log.d("test", "テスト実行");
             }

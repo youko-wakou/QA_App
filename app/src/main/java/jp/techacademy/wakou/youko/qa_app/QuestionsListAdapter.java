@@ -24,7 +24,8 @@ public class QuestionsListAdapter extends BaseAdapter {
     private LayoutInflater mLayoutInflater = null;
     private ArrayList<Question>mQuestionArrayList;
     public Button mfavo_b;
-    private void onStart(){
+    private void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
         mfavo_b = findViewById(R.id.favobt);
         mfavo_b.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){

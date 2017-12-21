@@ -21,6 +21,7 @@ public class QuestionListActivity extends AppCompatActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.list_questions);
         mfavo_b = findViewById(R.id.favobt);
         mfavo_b.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

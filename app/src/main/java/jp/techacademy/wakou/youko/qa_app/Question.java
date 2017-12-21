@@ -1,5 +1,7 @@
 package jp.techacademy.wakou.youko.qa_app;
 
+import android.widget.Button;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -11,6 +13,7 @@ public class Question implements Serializable{
     private String mTitle;
     private String mBody;
     private String mName;
+    private Button mFavo;
     private String mUid;
     private String mQuestionUid;
     private int mGenre;
@@ -28,6 +31,9 @@ public class Question implements Serializable{
     }
     public String getUid(){
         return mUid;
+    }
+    public Button getFavo(){
+        return mFavo;
     }
     public String getQuestionUid(){
         return mQuestionUid;

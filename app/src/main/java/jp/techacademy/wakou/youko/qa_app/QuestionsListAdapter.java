@@ -1,10 +1,13 @@
 package jp.techacademy.wakou.youko.qa_app;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.preference.DialogPreference;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,6 +24,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 public class QuestionsListAdapter extends BaseAdapter {
+    public final int favoNum = 0;
+    QuestionListActivity activityQ;
     private LayoutInflater mLayoutInflater = null;
     private ArrayList<Question>mQuestionArrayList;
     public QuestionsListAdapter(Context context){
@@ -52,6 +57,36 @@ public class QuestionsListAdapter extends BaseAdapter {
         TextView resText = (TextView) convertView.findViewById(R.id.resTextView);
         int resNum = mQuestionArrayList.get(position).getAnswers().size();
         resText.setText(String.valueOf(resNum));
+
+        TextView favoData = (TextView)convertView.findViewById(R.id.favoData);
+        favoData.setText(String.valueOf(favoNum));
+        favoData.setVisibility(View.GONE);
+
+
+
+        Button favoBT = (Button)convertView.findViewById(R.id.favobt);
+        favoBT.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                if(favoNum == 0){
+                    int favoNum = 1;
+                    new AlertDialog.Builder(activityQ)
+                            .setTitle("お気に入り")
+                            .setMessage("追加しました")
+                            .setPositiveButton("OK", null)
+                            .show();
+
+                }else{
+                    int favoNum = 0;
+                    new AlertDialog.Builder(activityQ)
+                            .setTitle("お気に入り")
+                            .setMessage("削除しました")
+                            .setPositiveButton("OK", null)
+                            .show();
+                }
+                Log.d("test", "テスト実行");
+            }
+        });
 
         byte[]bytes = mQuestionArrayList.get(position).getImageBytes();
         if(bytes.length != 0){

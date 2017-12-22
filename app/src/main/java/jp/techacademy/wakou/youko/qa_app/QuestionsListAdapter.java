@@ -23,11 +23,12 @@ import android.widget.TextView;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import java.applet.*;
-import java.awt.*;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 public class QuestionsListAdapter extends BaseAdapter {
     public int favoNum = 0;
     QuestionListActivity activityQ;
@@ -36,6 +37,7 @@ public class QuestionsListAdapter extends BaseAdapter {
     public QuestionsListAdapter(Context context){
         mLayoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
+
     @Override
     public int getCount(){
         return mQuestionArrayList.size();
@@ -64,19 +66,20 @@ public class QuestionsListAdapter extends BaseAdapter {
         resText.setText(String.valueOf(resNum));
 
         TextView favoData = (TextView)convertView.findViewById(R.id.favoData);
-        favoData.setText(String.valueOf(favoNum));
         favoData.setVisibility(View.GONE);
 
         final Button favoBT = (Button)convertView.findViewById(R.id.favobt);
         favoBT.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                 if(favoNum == 0){
+                Map<String,Integer> data = new HashMap<String,Integer>();
+                if(favoNum == 0){
                      favoNum = 1;
-                     favoBT.setBackground(Color.yellow);
-
-
-                 }else{
+                    data.put("favo",favoNum);
+                    System.out.print("お気に入りに登録しました");
+                }else{
                     favoNum = 0;
+                    data.put("favo",favoNum);
+                    System.out.print("お気に入りを解除しました");
                 }
                 Log.d("test", "テスト実行");
             }

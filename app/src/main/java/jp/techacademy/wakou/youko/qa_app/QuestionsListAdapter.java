@@ -25,11 +25,16 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class QuestionsListAdapter extends BaseAdapter {
+    public QuestionListActivity questionListC;
+    public String favoT;
+    public String favoM;
     public int favoNum = 0;
     QuestionListActivity activityQ;
     private LayoutInflater mLayoutInflater = null;
@@ -71,15 +76,18 @@ public class QuestionsListAdapter extends BaseAdapter {
         final Button favoBT = (Button)convertView.findViewById(R.id.favobt);
         favoBT.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                favoT = "お気に入り";
                 Map<String,Integer> data = new HashMap<String,Integer>();
                 if(favoNum == 0){
                      favoNum = 1;
                     data.put("favo",favoNum);
-                    System.out.print("お気に入りに登録しました");
+                    favoM = "お気に入りに登録しました";
+                    questionListC.favoAdd(favoT,favoM);
                 }else{
                     favoNum = 0;
                     data.put("favo",favoNum);
-                    System.out.print("お気に入りを解除しました");
+                    favoM = "お気に入りを解除しました";
+                    questionListC.favoAdd(favoT,favoM);
                 }
                 Log.d("test", "テスト実行");
             }

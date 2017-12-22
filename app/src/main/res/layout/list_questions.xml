@@ -39,6 +39,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/favoData"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/favoM"/>
     <Button
         android:id="@+id/favobt"
         android:layout_width="wrap_content"

@@ -83,11 +83,14 @@ public class QuestionsListAdapter extends BaseAdapter {
                     data.put("favo",favoNum);
                     favoM = "お気に入りに登録しました";
                     questionListC.favoAdd(favoT,favoM);
+                    favoBT.setBackgroundResource(R.drawable.favo);
+
                 }else{
                     favoNum = 0;
                     data.put("favo",favoNum);
                     favoM = "お気に入りを解除しました";
                     questionListC.favoAdd(favoT,favoM);
+                    favoBT.setBackgroundResource(R.drawable.favo_n);
                 }
                 Log.d("test", "テスト実行");
             }
